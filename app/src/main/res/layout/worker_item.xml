@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:paddingEnd="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
     android:paddingStart="16dp">
 
     <ImageView

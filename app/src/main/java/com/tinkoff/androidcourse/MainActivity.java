@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new WorkersRecyclerViewAdapter(new ArrayList<Worker>());
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new CustomItemDecorator());
 
         ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(adapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);

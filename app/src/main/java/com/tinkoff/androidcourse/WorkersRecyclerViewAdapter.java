@@ -24,15 +24,7 @@ public class WorkersRecyclerViewAdapter extends RecyclerView.Adapter<WorkersRecy
 
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
-        if (fromPosition < toPosition) {
-            for (int i = fromPosition; i < toPosition; i++) {
-                Collections.swap(workers, i, i + 1);
-            }
-        } else {
-            for (int i = fromPosition; i > toPosition; i--) {
-                Collections.swap(workers, i, i - 1);
-            }
-        }
+        Collections.swap(workers, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
     }
 
