@@ -3,9 +3,17 @@ package com.tinkoff.androidcourse;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+    WorkersRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,17 +24,20 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /**
-                 * Реализовать добавление тестовых работников
-                 */
+                ArrayList<Worker> workers = new ArrayList<>(WorkerGenerator.generateWorkers(3));
+
+                adapter.addData(workers);
             }
         });
 
 
-        /**
-         * Реализовать адаптер, выбрать любой LayoutManager и прикрутить это всё к RecyclerView
-         *
-         * Тестовые данные для отображения генерятся WorkerGenerator
-         */
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new WorkersRecyclerViewAdapter(new ArrayList<Worker>());
+        recyclerView.setAdapter(adapter);
+
+        ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(adapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(recyclerView);
     }
 }
